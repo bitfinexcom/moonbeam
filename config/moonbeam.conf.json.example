@@ -1,0 +1,6 @@
+{
+  "port": 8181,
+  "timeout_sec": 1800,
+  "redisUrl": "localhost",
+  "redisPort": 1111
+}
