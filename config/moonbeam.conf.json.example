@@ -1,6 +1,4 @@
 {
   "port": 8181,
-  "timeoutSec": 1800,
-  "dbName": "foo_history",
-  "mongoUrl": "mongodb://localhost"
+  "timeoutSec": 1800
 }
