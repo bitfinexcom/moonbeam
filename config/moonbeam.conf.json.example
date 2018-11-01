@@ -1,6 +1,6 @@
 {
   "port": 8181,
-  "timeout_sec": 1800,
-  "redisUrl": "localhost",
-  "redisPort": 1111
+  "timeoutSec": 1800,
+  "dbName": "foo_history",
+  "mongoUrl": "mongodb://localhost"
 }
