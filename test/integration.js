@@ -15,19 +15,34 @@ const CONF = {
   'port': 8282,
   'timeoutSec': 30,
   'dbName': 'foo',
-  'mongoUrl': 'mongodb://localhost'
+  'mongoUrl': 'mongodb://localhost',
+  'sunbeam': {
+    'eos': {
+      'Eos': () => {},
+      'auth': {
+        'keys': {},
+        'scatter': null
+      }
+    }
+  }
 }
 
 describe('integration test', () => {
   it('handles invalid data', async () => {
-    const s = server(CONF)
+    const noop = (cb) => { cb() }
+    const plugins = [{ name: 'db', plugin: { start: noop, stop: noop } }]
+
+    const s = server(CONF, plugins)
     const listen = promisify(s.listen).bind(s)
+    const stop = promisify(s.stop).bind(s)
+
     await listen()
 
     const msg = getMessage()
     msg[0].command = 'blerg'
     const res = await post(msg)
     assert.strictEqual(res.error, 'ERR_INVALID_PAYLOAD')
-    s.stop()
+
+    await stop()
   })
 })
