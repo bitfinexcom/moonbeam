@@ -8,8 +8,11 @@ const db = require('./lib/mongo')(dbConf)
 const plugins = [{ name: 'db', plugin: db }]
 
 const inst = server(conf, plugins)
-inst.listen((err) => {
+inst.connect((err) => {
   if (err) throw err
+  inst.listen((err) => {
+    if (err) throw err
+  })
 })
 
 module.exports = inst

@@ -14,14 +14,16 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "mocha": "^5.2.0",
-    "request": "^2.88.0",
     "standard": "^12.0.1"
   },
   "dependencies": {
     "async": "^2.6.1",
-    "eosjs-ecc": "^4.0.4",
+    "eosjs": "^16.0.9",
     "express": "^4.16.4",
     "helmet": "^3.14.0",
-    "mongodb": "^3.1.8"
+    "joi": "^14.0.6",
+    "mongodb": "^3.1.8",
+    "sunbeam": "git+https://github.com/bitfinexcom/sunbeam.git",
+    "uuid": "^3.3.2"
   }
 }

@@ -1,4 +1,28 @@
 {
   "port": 8181,
-  "timeoutSec": 1800
+  "requestTimeout": 20,
+  "maxResults": 1000,
+
+  "sunbeam": {
+    "url": "ws://INSERT_WS_ENDPOINT",
+    "moonbeam": null,
+    "eos": {
+      "expireInSeconds": 3600,
+      "Eos": null,
+      "httpEndpoint": "http://INSERT_HTTP_ENDPOINT",
+      "auth": {
+        "keys": {
+          "keyProvider": ["NO_KEY_NEEDED_LEAVE_AS_IS"],
+          "account": "nouserneeded",
+          "permission": "@sunbeam"
+        },
+        "scatter": null
+      }
+    },
+    "transform": {
+      "orderbook": { "keyed": true },
+      "wallet": {},
+      "orders": { "keyed": true }
+    }
+  }
 }
