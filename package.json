@@ -23,6 +23,7 @@
     "helmet": "^3.14.0",
     "joi": "^14.0.6",
     "mongodb": "^3.1.8",
+    "moonbeam-mongodb": "git+https://github.com/bitfinexcom/moonbeam-mongodb.git",
     "sunbeam": "git+https://github.com/bitfinexcom/sunbeam.git",
     "uuid": "^3.3.2"
   }
