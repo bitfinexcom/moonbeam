@@ -1,9 +1,15 @@
 'use strict'
 
-const conf = require('./config/moonbeam.conf.json')
-const server = require('./lib/moonbeam')
+const argv = require('yargs').argv
+const _ = require('lodash')
 
+const conf = require('./config/moonbeam.conf.json')
 const dbConf = require('./config/moonbeam.mongo.conf.json')
+
+_.assign(conf, argv)
+_.assign(dbConf, argv)
+
+const server = require('./lib/moonbeam')
 const db = require('moonbeam-mongodb')(dbConf)
 const plugins = [{ name: 'db', plugin: db }]
 
