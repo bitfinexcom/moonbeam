@@ -1,5 +1,7 @@
 {
   "port": 8181,
+  "socket": null,
+
   "requestTimeout": 20,
   "maxResults": 1000,
 
