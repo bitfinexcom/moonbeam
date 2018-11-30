@@ -5,6 +5,11 @@
   "requestTimeout": 20,
   "maxResults": 1000,
 
+  "cors": {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+  },
+
   "sunbeam": {
     "url": "ws://INSERT_WS_ENDPOINT",
     "moonbeam": null,
