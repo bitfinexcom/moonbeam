@@ -14,9 +14,9 @@ const db = require('moonbeam-mongodb')(dbConf)
 const plugins = [{ name: 'db', plugin: db }]
 
 const inst = server(conf, plugins)
-inst.connect((err) => {
+inst.listen((err) => {
   if (err) throw err
-  inst.listen((err) => {
+  inst.connect((err) => {
     if (err) throw err
   })
 })

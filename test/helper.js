@@ -22,15 +22,24 @@ function getPost (port) {
 exports.getMessage = getMessage
 function getMessage (ts) {
   const msg = {
-    'ts': ts || Date.now(), // changed ts
-    'command': 'eosfinex_get_history',
-    'auth': {
-      'authorization': {
-        'authorization': 'testuser1431@active'
-      },
-      'account': 'testuser1431'
+    meta: {
+      'expiration': '2018-12-06T10:58:49',
+      'ref_block_num': 33627,
+      'ref_block_prefix': 180599882,
+      'max_net_usage_words': 0,
+      'max_cpu_usage_ms': 0,
+      'delay_sec': 0,
+      'context_free_actions': [],
+      'actions': [{
+        'account': 'efinexchange',
+        'name': 'validate',
+        'authorization': [{ 'actor': 'testuser4321', 'permission': 'active' }],
+        'data': ''
+      }],
+      'transaction_extensions': [],
+      'signatures': ['SIG_K1_JynbyfBZpdiQGJpfSyQ27Kx3FaMVh3fiLSC8ChLthqFc4QHZXhFiRGUEENukZ78AFhAXdvxwDRfTgpjnM9sPDYpquedq5C']
     },
-    'pub': 'EOS83msFTj6yv5U91KkiRxHcDZUXJkR6xwC9EjbqqwFqhFa1nxMYx'
+    limit: 50
   }
 
   const sig = 'foo'
