@@ -2,16 +2,21 @@
 
 const request = require('request')
 
-exports.getPost = getPost
-function getPost (port) {
-  return function post (payload) {
+exports.getReq = getReq
+function getReq (port) {
+  return function req (method, upath, payload) {
     return new Promise((resolve, reject) => {
-      request({
-        method: 'POST',
-        uri: `http://localhost:${port}/history`,
-        json: true,
-        body: payload
-      }, (err, res, body) => {
+      const opts = {
+        method: method,
+        uri: `http://localhost:${port}${upath}`,
+        json: true
+      }
+
+      if (payload) {
+        opts.body = payload
+      }
+
+      request(opts, (err, res, body) => {
         if (err) return reject(err)
         resolve(body)
       })

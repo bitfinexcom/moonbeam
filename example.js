@@ -1,9 +1,10 @@
 'use strict'
 
 const { port } = require('./config/moonbeam.conf.json')
-const { getPost } = require('./test/helper')
+const { getReq } = require('./test/helper')
 
-const post = getPost(port)
+const req = getReq(port)
+
 ;(async () => {
   const payload = {
     meta: {
@@ -26,5 +27,11 @@ const post = getPost(port)
     limit: 50
   }
 
-  console.log(await post(payload))
+  console.log(await req('POST', '/history', payload))
+})()
+
+;(async () => {
+  console.log(await req('GET', '/v2/candles/trade:1m:tEOS.USD/last'))
+  const end = Date.now()
+  console.log(await req('GET', `/v2/candles/trade:1m:tEOS.USD/hist?end=${end}`))
 })()
