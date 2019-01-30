@@ -4,14 +4,21 @@ const argv = require('yargs').argv
 const _ = require('lodash')
 
 const conf = require('./config/moonbeam.conf.json')
-const dbConf = require('./config/moonbeam.mongo.conf.json')
 
 _.assign(conf, argv)
-_.assign(dbConf, argv)
 
 const server = require('./lib/moonbeam')
-const db = require('moonbeam-mongodb')(dbConf)
-const plugins = [{ name: 'db', plugin: db }]
+
+const dbConfUsers = require('./config/moonbeam.mongo.conf.json')
+const dbUsers = require('moonbeam-mongodb')(dbConfUsers)
+
+const dbConfPublicTrades = require('./config/mongo.pubtrades.conf.json')
+const dbPublicTrades = require('moonbeam-mongodb')(dbConfPublicTrades)
+
+const plugins = [
+  { name: 'userDb', plugin: dbUsers },
+  { name: 'publicTradesDb', plugin: dbPublicTrades }
+]
 
 const inst = server(conf, plugins)
 inst.listen((err) => {

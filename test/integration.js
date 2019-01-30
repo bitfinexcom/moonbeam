@@ -3,19 +3,20 @@
 'use strict'
 
 const server = require('../lib/moonbeam')
-const { getMessage, getPost } = require('./helper')
+const { getMessage, getReq } = require('./helper')
 
 const { promisify } = require('util')
 const assert = require('assert')
 
 const PORT = 8282
-const post = getPost(PORT)
+const req = getReq(PORT)
 
 const CONF = {
   'port': 8282,
   'timeoutSec': 30,
   'dbName': 'foo',
   'mongoUrl': 'mongodb://localhost',
+  'cors': {},
   'sunbeam': {
     'eos': {
       'Eos': () => {},
@@ -40,7 +41,8 @@ describe('integration test', () => {
 
     const msg = getMessage()
     msg[0].command = 'blerg'
-    const res = await post(msg)
+    const res = await req('POST', '/history', msg)
+    console.log('res', res)
     assert.strictEqual(res.error, 'ERR_INVALID_PAYLOAD')
 
     await stop()

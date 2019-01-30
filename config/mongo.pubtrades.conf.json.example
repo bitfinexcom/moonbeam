@@ -1,0 +1,6 @@
+{
+  "dbName": "trades",
+  "mongoUrl": "mongodb://localhost",
+  "collection": "candles",
+  "indexes": null
+}
