@@ -28,11 +28,11 @@ const CONF = {
   }
 }
 
+const noop = (cb) => { cb() }
+const plugins = [{ name: 'db', plugin: { start: noop, stop: noop } }]
+
 describe('integration test', () => {
   it('handles invalid data', async () => {
-    const noop = (cb) => { cb() }
-    const plugins = [{ name: 'db', plugin: { start: noop, stop: noop } }]
-
     const s = server(CONF, plugins)
     const listen = promisify(s.listen).bind(s)
     const stop = promisify(s.stop).bind(s)
@@ -44,6 +44,20 @@ describe('integration test', () => {
     const res = await req('POST', '/history', msg)
     console.log('res', res)
     assert.strictEqual(res.error, 'ERR_INVALID_PAYLOAD')
+
+    await stop()
+  })
+
+  it('returns the server time for the charting lib', async () => {
+    const s = server(CONF, plugins)
+    const listen = promisify(s.listen).bind(s)
+    const stop = promisify(s.stop).bind(s)
+
+    await listen()
+
+    const res = await req('GET', '/time')
+    assert.ok(res[0], 'field set')
+    assert.ok(+res[0] > 1549637103842, 'returns timestamp')
 
     await stop()
   })
