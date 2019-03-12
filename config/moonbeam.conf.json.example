@@ -32,5 +32,13 @@
       "wallet": {},
       "orders": { "keyed": true }
     }
+  },
+
+  "faucet": {
+    "keyProvider": ["FAUCET_BOT_KEY"],
+    "account": "faucetuser@active",
+    "httpEndpoint": "http://INSERT_HTTP_ENDPOINT",
+    "contract": "foo_faucet",
+    "chainId": "12345"
   }
 }
