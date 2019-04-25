@@ -16,7 +16,6 @@
     "moonbeam": null,
     "eos": {
       "expireInSeconds": 3600,
-      "Eos": null,
       "httpEndpoint": "http://INSERT_HTTP_ENDPOINT",
       "auth": {
         "keys": {
@@ -36,9 +35,8 @@
 
   "faucet": {
     "keyProvider": ["FAUCET_BOT_KEY"],
-    "account": "faucetuser@active",
+    "account": "faucetuser",
     "httpEndpoint": "http://INSERT_HTTP_ENDPOINT",
-    "contract": "foo_faucet",
-    "chainId": "12345"
+    "contract": "foo_faucet"
   }
 }
