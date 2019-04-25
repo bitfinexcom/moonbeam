@@ -7,33 +7,19 @@ const req = getReq(port)
 
 ;(async () => {
   const payload = {
-    "meta": {
-      "expiration": "2019-03-08T14:23:23",
-      "ref_block_num": 31766,
-      "ref_block_prefix": 506243300,
-      "max_net_usage_words": 0,
-      "max_cpu_usage_ms": 0,
-      "delay_sec": 0,
-      "context_free_actions": [],
-      "actions": [
-        {
-          "account": "efinexchange",
-          "name": "validate",
-          "authorization": [
-            {
-              "actor": "testuser1114",
-              "permission": "active"
-            }
-          ],
-          "data": ""
-        }
-      ],
-      "transaction_extensions": [],
-      "signatures": [
-        "SIG_K1_JzxfeT56y6pE8adfcC6NHEof535SRaKCxK7wdUktsEDgDZEcyLFYVi7wRrqYdLyqCmj7MwvhxZZnPScVgqmJMStWaUn9CD"
-      ]
+    'meta': {
+      'expiration': '2019-04-25T15:29:41.000',
+      'ref_block_num': 37020,
+      'ref_block_prefix': 186465237,
+      'max_net_usage_words': 0,
+      'max_cpu_usage_ms': 0,
+      'delay_sec': 0,
+      'context_free_actions': [],
+      'actions': [{ 'account': 'efinexchange', 'name': 'validate', 'authorization': [{ 'actor': 'testuser1113', 'permission': 'active' }], 'data': '' }],
+      'transaction_extensions': [],
+      'signatures': ['SIG_K1_Khej9TF52MbqXNdAeD4fDTMvADj7d7YpquGzPhd6DqP3Wgd5q38aKhWmCd8gZwUwgjFwM3pJVUaMVGi2fdo7UoW3cFw5mX']
     },
-    limit: 50
+    'limit': 50
   }
 
   console.log(await req('POST', '/history', payload))
