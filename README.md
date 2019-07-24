@@ -11,3 +11,8 @@ cp config/mongo.pubtrades.conf.json.example config/mongo.pubtrades.conf.json
 ```
 node worker.js [--$YOUR_CONFIG_OVERRIDES]
 ```
+
+## indexes
+
+1. https://github.com/bitfinexcom/moonbeam-history#indexes
+2. candle worker indexes
