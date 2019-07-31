@@ -37,6 +37,11 @@
     "keyProvider": ["FAUCET_BOT_KEY"],
     "account": "faucetuser",
     "httpEndpoint": "http://INSERT_HTTP_ENDPOINT",
-    "contract": "foo_faucet"
+    "contract": "foo_faucet",
+
+    "action": "faucet",
+    "score": 0.5,
+    "sitekey": "",
+    "sitesecret": ""
   }
 }
