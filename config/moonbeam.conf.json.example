@@ -42,6 +42,7 @@
     "action": "faucet",
     "score": 0.5,
     "sitekey": "",
-    "sitesecret": ""
+    "sitesecret": "",
+    "version": "v3"
   }
 }
