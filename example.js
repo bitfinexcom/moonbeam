@@ -36,4 +36,5 @@ const req = getReq(port)
 
   const res = ''
   console.log(await req('POST', '/faucet', { user: 'testuser4321', response: res }))
+  console.log(await req('POST', '/fauxh', { user: 'testuser4321', response: res }))
 })()
