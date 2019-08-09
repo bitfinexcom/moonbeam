@@ -3,7 +3,7 @@
 'use strict'
 
 const server = require('../lib/moonbeam')
-const { getMessage, getReq } = require('./helper')
+const { getReq } = require('./helper')
 
 const { promisify } = require('util')
 const assert = require('assert')
@@ -28,8 +28,14 @@ const CONF = {
   }
 }
 
-const noop = (cb) => { cb() }
-const plugins = [{ name: 'db', plugin: { start: noop, stop: noop } }]
+const noop = (cb = () => {}) => { cb() }
+const plugins = [
+  {
+    name: 'userDb',
+    plugin: { start: noop, stop: noop, db: { collection: noop }, conf: {} }
+
+  }
+]
 
 describe('integration test', () => {
   it('handles invalid data', async () => {
@@ -39,10 +45,14 @@ describe('integration test', () => {
 
     await listen()
 
-    const msg = getMessage()
-    msg[0].command = 'blerg'
+    const msg = {
+      meta: {
+        expiration: '2019-04-25T15:29:41.000',
+        actions: []
+      }
+    }
     const res = await req('POST', '/history', msg)
-    console.log('res', res)
+
     assert.strictEqual(res.error, 'ERR_INVALID_PAYLOAD')
 
     await stop()
