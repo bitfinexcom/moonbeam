@@ -43,6 +43,12 @@
     "score": 0.5,
     "sitekey": "",
     "sitesecret": "",
-    "version": "v3"
+    "version": "v3",
+
+    "hcaptcha": {
+      "__IF_SITESECRET_NOT_SET_ROUTE_IS_NOT_LOADED": "",
+      "sitekey": "",
+      "sitesecret": ""
+    }
   }
 }
