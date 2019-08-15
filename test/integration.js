@@ -14,7 +14,8 @@ const req = getReq(PORT)
 const CONF = {
   port: 8282,
   timeoutSec: 30,
-  dbName: 'foo',
+  tosCurrent: 1337,
+  tosCurrentDate: '2019-07-24',
   mongoUrl: 'mongodb://localhost',
   cors: {},
   sunbeam: {
@@ -68,6 +69,19 @@ describe('integration test', () => {
     const res = await req('GET', '/time')
     assert.ok(res[0], 'field set')
     assert.ok(+res[0] > 1549637103842, 'returns timestamp')
+
+    await stop()
+  })
+
+  it('returns the current tos', async () => {
+    const s = server(CONF, plugins)
+    const listen = promisify(s.listen).bind(s)
+    const stop = promisify(s.stop).bind(s)
+
+    await listen()
+
+    const res = await req('GET', '/tos')
+    assert.deepStrictEqual(res, [1337, '2019-07-24'])
 
     await stop()
   })
