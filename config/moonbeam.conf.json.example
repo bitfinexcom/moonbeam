@@ -11,6 +11,10 @@
     "Access-Control-Allow-Headers": "x-csrf-token, Content-Type, Authorization, Content-Length, X-Requested-With"
   },
 
+  "tosCurrent": 1,
+  "tosCurrentDate": "2019-07-24",
+  "tosAvailable": [ 1 ],
+
   "sunbeam": {
     "url": "ws://INSERT_WS_ENDPOINT",
     "moonbeam": null,

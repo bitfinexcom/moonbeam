@@ -26,6 +26,12 @@ const req = getReq(port)
 
   console.log(await req('POST', '/get-tos', payload))
   console.log(await req('POST', '/set-tos', payload))
+
+  console.log(await req('GET', '/tos'))
+
+  payload.v = 1
+  console.log(await req('POST', '/s-tos', payload))
+  console.log(await req('POST', '/g-tos', payload))
 })()
 
 ;(async () => {
