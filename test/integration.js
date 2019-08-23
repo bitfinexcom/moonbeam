@@ -12,17 +12,17 @@ const PORT = 8282
 const req = getReq(PORT)
 
 const CONF = {
-  'port': 8282,
-  'timeoutSec': 30,
-  'dbName': 'foo',
-  'mongoUrl': 'mongodb://localhost',
-  'cors': {},
-  'sunbeam': {
-    'eos': {
-      'Eos': () => {},
-      'auth': {
-        'keys': {},
-        'scatter': null
+  port: 8282,
+  timeoutSec: 30,
+  dbName: 'foo',
+  mongoUrl: 'mongodb://localhost',
+  cors: {},
+  sunbeam: {
+    eos: {
+      Eos: () => {},
+      auth: {
+        keys: {},
+        scatter: null
       }
     }
   }
