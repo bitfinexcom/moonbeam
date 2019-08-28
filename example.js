@@ -41,6 +41,5 @@ const req = getReq(port)
   console.log(await req('GET', `/v2/candles/trade:1m:tEOS.USD/hist?end=${end}`))
 
   const res = ''
-  console.log(await req('POST', '/faucet', { user: 'testuser4321', response: res }))
   console.log(await req('POST', '/fauxh', { user: 'testuser4321', response: res }))
 })()
