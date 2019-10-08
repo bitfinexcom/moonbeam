@@ -24,9 +24,6 @@ const req = getReq(port)
 
   console.log(await req('POST', '/history', payload))
 
-  console.log(await req('POST', '/get-tos', payload))
-  console.log(await req('POST', '/set-tos', payload))
-
   console.log(await req('GET', '/tos'))
 
   payload.v = 1
