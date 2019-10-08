@@ -19,6 +19,9 @@ const CONF = {
   mongoUrl: 'mongodb://localhost',
   cors: {},
   sunbeam: {
+    urls: {
+      pub: 'ws://localhost:8888'
+    },
     eos: {
       Eos: () => {},
       auth: {
