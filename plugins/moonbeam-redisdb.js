@@ -44,7 +44,7 @@ class RedisDbPlugin {
       : this.conf.name
   }
 
-  hmset (key, val, expTime = 20) {
+  hmset (key, val, expTime) {
     const _key = this.getKey(key)
     const pipeline = this.client.pipeline()
 
