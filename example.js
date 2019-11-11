@@ -3,9 +3,16 @@
 const { port } = require('./config/moonbeam.conf.json')
 const { getReq } = require('./test/helper')
 
+const configSunbeam = require('./config/dev-signing-ws.config.json')
+const getSunbeam = require('./dev-get-signed-tx')
+
 const req = getReq(port)
 
 ;(async () => {
+  const sb = await getSunbeam(configSunbeam)
+  const payload = await sb.getSignedTx()
+
+  /*
   const payload = {
     meta: {
       expiration: '2019-04-25T15:29:41.000',
@@ -21,9 +28,9 @@ const req = getReq(port)
     },
     limit: 50
   }
+  */
 
   console.log(await req('POST', '/history', payload))
-
   console.log(await req('GET', '/tos'))
 
   payload.v = 1
