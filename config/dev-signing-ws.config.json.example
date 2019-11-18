@@ -3,7 +3,7 @@
     "keys": ["__SECRET__"],
 
     "urls": {
-      "aux": "ws://__API__"
+      "priv": "ws://__API__"
     },
     "eos": {
       "expireInSeconds": 3600,

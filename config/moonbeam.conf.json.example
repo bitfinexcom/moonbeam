@@ -15,6 +15,11 @@
   "tosCurrentDate": "2019-07-24",
   "tosAvailable": [ 1 ],
 
+  "verifyTxMain": {
+    "httpEndpoint": "http://INSERT_MAINNET_HTTP_ENDPOINT",
+    "contract": "testfaucet11"
+  },
+
   "sunbeam": {
     "urls": {
       "aux": "ws://INSERT_WS_ENDPOINT"
