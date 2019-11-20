@@ -3,8 +3,6 @@
     "keys": ["__SECRET__"],
 
     "urls": {
-      "pub": "ws://__API__",
-      "priv": "ws://__API__",
       "aux": "ws://__API__"
     },
     "eos": {

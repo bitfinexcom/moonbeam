@@ -17,8 +17,6 @@
 
   "sunbeam": {
     "urls": {
-      "pub": "ws://INSERT_WS_ENDPOINT",
-      "priv": "ws://INSERT_WS_ENDPOINT",
       "aux": "ws://INSERT_WS_ENDPOINT"
     },
     "moonbeam": null,
