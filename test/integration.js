@@ -16,6 +16,9 @@ const CONF = {
   timeoutSec: 30,
   tosCurrent: 1337,
   tosCurrentDate: '2019-07-24',
+  verifyTxMain: {
+    httpEndpoint: 'http://localhost'
+  },
   mongoUrl: 'mongodb://localhost',
   cors: {},
   sunbeam: {
