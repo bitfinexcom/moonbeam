@@ -22,9 +22,16 @@ const req = getReq(port)
   console.log(await req('POST', '/history', payload))
   console.log(await req('GET', '/tos'))
 
-  payload.v = 1
-  console.log(await req('POST', '/s-tos', payload))
-  console.log(await req('POST', '/g-tos', payload))
+  const tosPayload = {
+    ...payload,
+    v: 1
+  }
+  console.log(await req('POST', '/s-tos', tosPayload))
+  console.log(await req('POST', '/g-tos', tosPayload))
+
+  console.log(await req('GET', '/competition'))
+  console.log(await req('GET', '/competition/leaderboard/vol'))
+  console.log(await req('POST', '/competition/signup', payload))
 })()
 
 ;(async () => {
