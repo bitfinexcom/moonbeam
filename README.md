@@ -8,6 +8,7 @@ Moonbeam manages offers historical data to eosfinex users.
 cp config/moonbeam.conf.json.example config/moonbeam.conf.json
 cp config/moonbeam.mongo.conf.json.example config/moonbeam.mongo.conf.json
 cp config/mongo.pubtrades.conf.json.example config/mongo.pubtrades.conf.json
+cp config/grenache.service.conf.json.example config/grenache.service.conf.json
 ```
 
 ```
@@ -18,3 +19,4 @@ node worker.js [--$YOUR_CONFIG_OVERRIDES]
 
 1. https://github.com/bitfinexcom/moonbeam-history#indexes
 2. candle worker indexes
+3. affiliate indexes
