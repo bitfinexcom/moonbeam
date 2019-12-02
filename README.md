@@ -18,3 +18,4 @@ node worker.js [--$YOUR_CONFIG_OVERRIDES]
 
 1. https://github.com/bitfinexcom/moonbeam-history#indexes
 2. candle worker indexes
+3. affiliate indexes

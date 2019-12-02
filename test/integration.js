@@ -11,6 +11,8 @@ const assert = require('assert')
 const PORT = 8282
 const req = getReq(PORT)
 
+const grenacheService = require('../lib/helpers/grenache-service')
+
 const CONF = {
   port: 8282,
   timeoutSec: 30,
@@ -41,7 +43,8 @@ const plugins = [
     name: 'userDb',
     plugin: { start: noop, stop: noop, db: { collection: noop }, conf: {} }
 
-  }
+  },
+  { name: 'grenacheService', plugin: grenacheService }
 ]
 
 describe('integration test', () => {
