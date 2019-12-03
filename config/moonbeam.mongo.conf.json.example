@@ -2,7 +2,5 @@
   "dbName": "foo_history",
   "mongoUrl": "mongodb://localhost",
   "collection_trades": "userdata",
-  "collection_tos": "tos",
-  "collection_competitions": "competitions",
-  "collection_comp_results": "competition_results"
+  "collection_tos": "tos"
 }
