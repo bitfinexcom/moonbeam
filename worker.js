@@ -15,9 +15,12 @@ const dbUsers = require('moonbeam-mongodb')(dbConfUsers)
 const dbConfPublicTrades = require('./config/mongo.pubtrades.conf.json')
 const dbPublicTrades = require('moonbeam-mongodb')(dbConfPublicTrades)
 
+const grenacheService = require('./lib/helpers/grenache-service')
+
 const plugins = [
   { name: 'userDb', plugin: dbUsers },
-  { name: 'publicTradesDb', plugin: dbPublicTrades }
+  { name: 'publicTradesDb', plugin: dbPublicTrades },
+  { name: 'grenacheService', plugin: grenacheService }
 ]
 
 const inst = server(conf, plugins)

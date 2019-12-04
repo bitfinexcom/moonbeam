@@ -7,9 +7,7 @@
   "maxResults": 1000,
 
   "link": {
-    "grape": "http://127.0.0.1:30001",
-    "requestTimeout": 2500,
-    "lruMaxAgeLookup": 10000
+    "grape": "http://127.0.0.1:30001"
   },
 
   "cors": {
