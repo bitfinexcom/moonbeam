@@ -22,9 +22,27 @@ const req = getReq(port)
   console.log(await req('POST', '/history', payload))
   console.log(await req('GET', '/tos'))
 
-  payload.v = 1
-  console.log(await req('POST', '/s-tos', payload))
-  console.log(await req('POST', '/g-tos', payload))
+  const tosPayload = {
+    ...payload,
+    v: 1
+  }
+  console.log(await req('POST', '/s-tos', tosPayload))
+  console.log(await req('POST', '/g-tos', tosPayload))
+})()
+
+;(async () => {
+  const sb = await getSunbeam(config)
+  const meta = await sb.getSignedTx()
+
+  const payload = { meta }
+
+  console.log(await req('GET', '/competitions'))
+  console.log(await req('GET', '/competitions/1'))
+  console.log(await req('GET', '/competitions/active'))
+  console.log(await req('GET', '/competitions/1/leaderboard/vol'))
+  console.log(await req('GET', '/competitions/1/leaderboard/pnl'))
+  console.log(await req('POST', '/competitions/1/signup', payload))
+  console.log(await req('GET', '/competitions/1/signup', payload))
 })()
 
 ;(async () => {
