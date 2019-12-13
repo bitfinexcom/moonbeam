@@ -19,15 +19,17 @@ const req = getReq(port)
     meta
   }
 
-  console.log(await req('POST', '/history', payload))
-  console.log(await req('GET', '/tos'))
-
   const tosPayload = {
     ...payload,
     v: 1
   }
+
+  console.log(await req('POST', '/history', payload))
+  console.log(await req('GET', '/tos'))
+
   console.log(await req('POST', '/s-tos', tosPayload))
   console.log(await req('POST', '/g-tos', tosPayload))
+  console.log(await req('POST', '/login', tosPayload))
 })()
 
 ;(async () => {
@@ -74,7 +76,8 @@ const req = getReq(port)
 
   const payload = {
     t: tx,
-    v: 1
+    v: 1,
+    code: 'TEST12'
   }
 
   console.log(await req('POST', '/sm-tos', payload))
