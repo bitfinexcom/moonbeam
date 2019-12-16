@@ -6,10 +6,6 @@
   "requestTimeout": 20,
   "maxResults": 1000,
 
-  "link": {
-    "grape": "http://127.0.0.1:30001"
-  },
-
   "cors": {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "x-csrf-token, Content-Type, Authorization, Content-Length, X-Requested-With"
