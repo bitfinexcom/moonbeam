@@ -11,6 +11,14 @@
     "Access-Control-Allow-Headers": "x-csrf-token, Content-Type, Authorization, Content-Length, X-Requested-With"
   },
 
+  "tickerSymbols": [
+    "tEMT.EOS",
+    "tRAM.USDT",
+    "tEOX.USDT",
+    "tEMT.USDT",
+    "tEOS.USDT"
+  ],
+
   "tosCurrent": 1,
   "tosCurrentDate": "2019-07-24",
   "tosAvailable": [ 1 ],

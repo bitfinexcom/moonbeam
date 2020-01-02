@@ -94,3 +94,9 @@ const req = getReq(port)
   const res = ''
   console.log(await req('POST', '/fauxh', { user: 'testuser4321', response: res }))
 })()
+
+;(async () => {
+  console.log(await req('GET', '/ticker/tEOS.USDT'))
+  console.log(await req('GET', '/tickers?symbols=tEOS.USDT,tEOX.USDT'))
+  console.log(await req('GET', '/tickers?symbols=ALL'))
+})()
