@@ -48,7 +48,8 @@ const req = getReq(port)
 })()
 
 ;(async () => {
-  // mainchain verify
+  // mainchain verify and fwd tx
+  const expireInSeconds = 30
   const user = 'testuser1111'
   const client = getClient(config)
 
@@ -69,7 +70,7 @@ const req = getReq(port)
   const tx = await client.api.transact(txdata, {
     broadcast: false,
     blocksBehind: 3,
-    expireSeconds: 10
+    expireSeconds: expireInSeconds
   })
 
   tx.serializedTransaction = eos.Serialize.arrayToHex(tx.serializedTransaction)
@@ -82,6 +83,7 @@ const req = getReq(port)
 
   console.log(await req('POST', '/sm-tos', payload))
   console.log(await req('POST', '/gm-tos', payload))
+  console.log(await req('POST', '/push-tx', payload))
 })()
 
 ;(async () => {
