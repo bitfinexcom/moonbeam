@@ -20,6 +20,19 @@
     "contract": "testfaucet11"
   },
 
+  "cosign": {
+    "httpEndpoint": "http://INSERT_MAINNET_HTTP_ENDPOINT",
+    "enabled": true,
+    "account": "__ACCOUNT__",
+    "pKey": "__EXCHANGE_ACC_PRIVKEY__"
+  },
+
+  "hcaptcha": {
+    "enabled": false,
+    "endpoint": "https://hcaptcha.com/siteverify",
+    "secret": "__SECRET__"
+  },
+
   "sunbeam": {
     "urls": {
       "aux": "ws://INSERT_WS_ENDPOINT"
