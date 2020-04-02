@@ -1,24 +1,26 @@
 'use strict'
 
+const fetch = require('node-fetch')
 const eos = require('eosjs')
 
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig')
-const fetch = require('node-fetch')
 const { TextDecoder, TextEncoder } = require('util')
 
 const { port, cosign } = require('./config/moonbeam.conf.json')
 const { getReq } = require('./test/helper')
 
 const config = require('./config/dev-signing-ws.config.json')
-const { getSunbeam, getClient } = require('./dev-tools')
+const { getSunbeam, getClient, getScatterSigner } = require('./dev-tools')
 
 const req = getReq(port)
 
 ;(async () => {
   const { Api, JsonRpc, Serialize } = eos
-  const uPrivKey = '5KM3tHLwik5q91FALSkeqSRYPa6Kk7SpQn2BVdWusGLF4pG4f4F'
-  const uPubKey = 'EOS5ryJgoyweUpS5qiWPAAozgnFPp8ZTCSRi9apGiH9xD3SQVWPLh'
-  const uAccount = 'testuser1111'
+  const rpc = new JsonRpc(cosign.httpEndpoint, { fetch })
+  // used to create signature provider to simulate client
+  const uPrivKey = '<privKey>'
+  const uPubKey = '<pubKey>'
+  const uAccount = '<account>'
   const opts = {
     blocksBehind: 3,
     expireSeconds: 120
@@ -39,30 +41,30 @@ const req = getReq(port)
       tos: 1
     }
   }]
-  // Client-side signing using user's pkey
-  const jrpc = new JsonRpc(cosign.httpEndpoint, { fetch })
-  const signatureProvider = new JsSignatureProvider([uPrivKey])
+
+  // Use one of the signature providers to sign:
+  // Scatter signature provider
+  const signatureProvider = await getScatterSigner(rpc, uAccount)
+  // User pKey signature provider
+  // const signatureProvider = new JsSignatureProvider([uPrivKey])
+
   const api = new Api({
-    rpc: jrpc,
+    // use available keys to get partially signed transaction
+    authorityProvider: {
+      getRequiredKeys: () => signatureProvider.getAvailableKeys()
+    },
+    rpc: rpc,
     signatureProvider,
     textDecoder: new TextDecoder(),
     textEncoder: new TextEncoder()
   })
-  const requiredKeys = await api.signatureProvider.getAvailableKeys()
 
-  const { serializedTransaction } = await api.transact({ actions }, {
+  const { serializedTransaction, signatures } = await api.transact({ actions }, {
     ...opts,
     broadcast: false,
-    sign: false
+    sign: true
   })
-  const { chain_id: chainId } = await jrpc.get_info()
-  const signArgs = {
-    chainId,
-    requiredKeys,
-    serializedTransaction,
-    abis: []
-  }
-  const { signatures } = await api.signatureProvider.sign(signArgs)
+
   const hexTx = Serialize.arrayToHex(serializedTransaction)
 
   console.log(await req('POST', '/register', { tx: { serializedTransaction: hexTx, signatures } }))
