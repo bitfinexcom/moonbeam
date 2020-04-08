@@ -1,18 +1,18 @@
 'use strict'
 
 const argv = require('yargs').argv
-const _ = require('lodash')
 
-const conf = require('./config/moonbeam.conf.json')
+const {
+  moonbeamConf,
+  dbConfUsers,
+  dbConfPublicTrades
+} = require('./lib/helpers/config')
 
-_.assign(conf, argv)
+Object.assign(moonbeamConf, argv)
 
 const server = require('./lib/moonbeam')
 
-const dbConfUsers = require('./config/moonbeam.mongo.conf.json')
 const dbUsers = require('moonbeam-mongodb')(dbConfUsers)
-
-const dbConfPublicTrades = require('./config/mongo.pubtrades.conf.json')
 const dbPublicTrades = require('moonbeam-mongodb')(dbConfPublicTrades)
 
 const grenacheService = require('./lib/helpers/grenache-service')
@@ -23,7 +23,7 @@ const plugins = [
   { name: 'grenacheService', plugin: grenacheService }
 ]
 
-const inst = server(conf, plugins)
+const inst = server(moonbeamConf, plugins)
 inst.listen((err) => {
   if (err) throw err
   inst.connect((err) => {

@@ -3,22 +3,21 @@
 const fetch = require('node-fetch')
 const eos = require('eosjs')
 
-const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig')
 const { TextDecoder, TextEncoder } = require('util')
 
-const { port, cosign } = require('./config/moonbeam.conf.json')
+const { port, cosign, verifyTxMain } = require('./config/moonbeam.conf.json')
 const { getReq } = require('./test/helper')
 
 const config = require('./config/dev-signing-ws.config.json')
-const { getSunbeam, getClient, getScatterSigner } = require('./dev-tools')
+const { getClient, getScatterSigner } = require('./dev-tools')
 
-const req = getReq(port)
+const req = getReq(`http://localhost:${port}`)
 
 ;(async () => {
   const { Api, JsonRpc, Serialize } = eos
   const rpc = new JsonRpc(cosign.httpEndpoint, { fetch })
   // used to create signature provider to simulate client
-  const uPrivKey = '<privKey>'
+  // const uPrivKey = '<privKey>'
   const uPubKey = '<pubKey>'
   const uAccount = '<account>'
   const opts = {
@@ -46,6 +45,7 @@ const req = getReq(port)
   // Scatter signature provider
   const signatureProvider = await getScatterSigner(rpc, uAccount)
   // User pKey signature provider
+  // const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig')
   // const signatureProvider = new JsSignatureProvider([uPrivKey])
 
   const api = new Api({
@@ -67,9 +67,14 @@ const req = getReq(port)
 
   const hexTx = Serialize.arrayToHex(serializedTransaction)
 
-  console.log(await req('POST', '/register', { tx: { serializedTransaction: hexTx, signatures } }))
+  const payload = {
+    captcha: 'captcha',
+    data: { tx: { t: hexTx, s: signatures[0] } }
+  }
+  console.log(await req('POST', '/register', payload))
 })()
 
+/*
 ;(async () => {
   // sidechain verify
   const sb = await getSunbeam(config)
@@ -87,11 +92,12 @@ const req = getReq(port)
   console.log(await req('POST', '/history', payload))
   console.log(await req('GET', '/tos'))
 
-  console.log(await req('POST', '/s-tos', tosPayload))
-  console.log(await req('POST', '/g-tos', tosPayload))
-  console.log(await req('POST', '/login', tosPayload))
+  // TODO: needs to be updated due to new sign tos process
+  // console.log(await req('POST', '/login', tosPayload))
 })()
+*/
 
+/* TODO: new auth needs to be applied
 ;(async () => {
   const sb = await getSunbeam(config)
   const meta = await sb.getSignedTx()
@@ -106,17 +112,18 @@ const req = getReq(port)
   console.log(await req('POST', '/competitions/1/signup', payload))
   console.log(await req('GET', '/competitions/1/signup', payload))
 })()
+*/
 
 ;(async () => {
   // mainchain verify and fwd tx
   const expireInSeconds = 30
-  const user = 'testuser1111'
+  const user = 'testuser4321'
   const client = getClient(config)
 
   const txdata = {
     actions: [{
-      account: 'testfaucet11',
-      name: 'verify',
+      account: verifyTxMain.contract,
+      name: 'validate',
       authorization: [{
         actor: user,
         permission: 'active'
@@ -142,6 +149,5 @@ const req = getReq(port)
   }
 
   console.log(await req('POST', '/sm-tos', payload))
-  console.log(await req('POST', '/gm-tos', payload))
   console.log(await req('POST', '/push-tx', payload))
 })()

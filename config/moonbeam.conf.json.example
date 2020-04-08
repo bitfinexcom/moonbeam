@@ -22,7 +22,6 @@
 
   "cosign": {
     "httpEndpoint": "http://INSERT_MAINNET_HTTP_ENDPOINT",
-    "enabled": true,
     "account": "__ACCOUNT__",
     "pKey": "__EXCHANGE_ACC_PRIVKEY__"
   },
@@ -54,19 +53,6 @@
       "orderbook": { "keyed": true },
       "wallet": {},
       "orders": { "keyed": true }
-    }
-  },
-
-  "faucet": {
-    "keyProvider": ["FAUCET_BOT_KEY"],
-    "account": "faucetuser",
-    "httpEndpoint": "http://INSERT_HTTP_ENDPOINT",
-    "contract": "foo_faucet",
-
-    "hcaptcha": {
-      "__IF_SITESECRET_NOT_SET_ROUTE_IS_NOT_LOADED": "",
-      "sitekey": "",
-      "sitesecret": ""
     }
   }
 }

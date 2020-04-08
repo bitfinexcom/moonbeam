@@ -9,7 +9,7 @@ const { promisify } = require('util')
 const assert = require('assert')
 
 const PORT = 8282
-const req = getReq(PORT)
+const req = getReq(`http://localhost:${PORT}`)
 
 const CONF = {
   port: 8282,
@@ -17,8 +17,20 @@ const CONF = {
   tosCurrent: 1337,
   tosCurrentDate: '2019-07-24',
   verifyTxMain: {
-    httpEndpoint: 'http://localhost'
+    httpEndpoint: 'http://localhost',
+    contract: 'eosfinex'
   },
+
+  cosign: {
+    httpEndpoint: 'http://localhost',
+    account: 'eosfinex',
+    pKey: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
+  },
+
+  hcaptcha: {
+    enabled: false
+  },
+
   mongoUrl: 'mongodb://localhost',
   cors: {},
   sunbeam: {
@@ -61,20 +73,6 @@ describe('integration test', () => {
     const res = await req('POST', '/history', msg)
 
     assert.strictEqual(res.error, 'ERR_INVALID_PAYLOAD')
-
-    await stop()
-  })
-
-  it('returns the server time for the charting lib', async () => {
-    const s = server(CONF, plugins)
-    const listen = promisify(s.listen).bind(s)
-    const stop = promisify(s.stop).bind(s)
-
-    await listen()
-
-    const res = await req('GET', '/time')
-    assert.ok(res[0], 'field set')
-    assert.ok(+res[0] > 1549637103842, 'returns timestamp')
 
     await stop()
   })
