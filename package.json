@@ -20,16 +20,17 @@
     "ws": "^6.1.2"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "async": "^2.6.1",
     "axios": "^0.19.2",
     "bfx-lib-server-js": "git+https://github.com/bitfinexcom/bfx-lib-server-js.git#d6fdcf44f7fbd91f9286703ea69c8b91f884588a",
+    "config": "^3.3.1",
     "cors": "^2.8.5",
     "eos-name-verify": "git+https://github.com/bitfinexcom/eos-name-verify.git",
     "eosjs": "^20.0.0",
     "eosjs-ecc": "^4.0.7",
     "express": "^4.16.4",
     "helmet": "^3.14.0",
-    "joi": "^14.0.6",
     "moonbeam-mongodb": "git+https://github.com/bitfinexcom/moonbeam-mongodb.git",
     "node-fetch": "^2.3.0",
     "sunbeam": "git://github.com/bitfinexcom/sunbeam.git#mainnet",
