@@ -25,8 +25,14 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('creating auth transaction')
   const authTxPayload = await getAuthTxPayload(api, user)
 
+  console.log('creating usertos transaction')
+  const tosPayload = await getTosTxPayload(api, user)
+
   console.log('get v1/tos')
   console.log(await req('GET', '/v1/tos'))
+
+  console.log('post v1/push-tx, pushing usertos transaction')
+  console.log(await req('POST', '/v1/push-tx', { data: tosPayload }))
 
   console.log('post v1/history')
   console.log(await req('POST', '/v1/history', {
@@ -90,6 +96,33 @@ async function getAuthTxPayload (api, user) {
     }],
     data: {
       account: user
+    }
+  }]
+
+  const authTxData = await api.transact({ actions: authActions }, {
+    ...opts,
+    broadcast: false,
+    sign: true
+  })
+
+  const authTxHex = Serialize.arrayToHex(authTxData.serializedTransaction)
+  return {
+    t: authTxHex,
+    s: authTxData.signatures[0]
+  }
+}
+
+async function getTosTxPayload (api, user) {
+  const authActions = [{
+    account: contract,
+    name: 'usertos',
+    authorization: [{
+      actor: user,
+      permission: 'active'
+    }],
+    data: {
+      account: user,
+      tos: 1
     }
   }]
 
