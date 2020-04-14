@@ -1,6 +1,7 @@
 node_modules
 .DS_Store
 npm-debug.log
+config/*.js.bak
 !config/*.json.example
 config/*.json
 !config/facs/*.json.example

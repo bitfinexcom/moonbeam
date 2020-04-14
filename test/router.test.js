@@ -37,10 +37,10 @@ jest.mock('eosjs-ecc', () => ({
   initialize: jest.fn().mockResolvedValue()
 }))
 
-const db = require('../lib/helpers/db')
-const grenache = require('../lib/helpers/grenache')
-const ecc = require('eosjs-ecc')
-const server = require('../lib/server')
+// const db = require('../lib/helpers/db')
+// const grenache = require('../lib/helpers/grenache')
+// const ecc = require('eosjs-ecc')
+// const server = require('../lib/server')
 
 describe('routes tests', () => {
   it('returns the current tos', () => {
