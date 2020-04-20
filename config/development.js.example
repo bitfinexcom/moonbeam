@@ -6,7 +6,14 @@ module.exports = {
   contract: '__DEV_CONTRACT__',
 
   cosign: {
-    pKey: '__DEV_COSIGN_KEY__'
+    pKey: '__DEV_COSIGN_KEY__',
+    contract: '__CONTRACT__',
+    permission: '__PERMISSION__'
+  },
+
+  hcaptcha: {
+    enabled: true,
+    secret: '__SECRET__'
   },
 
   dbUsers: {

@@ -17,7 +17,9 @@ module.exports = {
   contract: '__ACCOUNT__',
 
   cosign: {
-    pKey: '__EXCHANGE_ACC_PRIVKEY__'
+    pKey: '__EXCHANGE_ACC_PRIVKEY__',
+    contract: '__CONTRACT__',
+    permission: '__PERMISSION__'
   },
 
   hcaptcha: {
