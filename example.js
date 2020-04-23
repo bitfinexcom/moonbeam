@@ -74,6 +74,9 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('get v1/competitions/:id/leaderboard/pnl')
   console.log(await req('GET', '/v1/competitions/1/leaderboard/pnl'))
 
+  console.log('post v1/competitions/:id/rank/vol')
+  console.log(await req('POST', '/v1/competitions/1/rank/vol', { auth: authTxPayload }))
+
   console.log('post v1/competitions/:id/signup/status')
   console.log(await req('POST', '/v1/competitions/1/signup/status', { auth: authTxPayload }))
 
