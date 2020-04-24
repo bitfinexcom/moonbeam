@@ -2,21 +2,21 @@
 
 # moonbeam
 
-Moonbeam manages offers historical data to eosfinex users.
+Moonbeam manages eosfinex users historical data and account management activities.
+
+Setup
+* Create a `config/<ENV>.js` file for the environment you're planning to use. `config/<ENV>.js` extends `config/default.js`. More info [here](https://github.com/lorenwest/node-config/wiki/Configuration-Files)
+* Fill in properties to override or extend `config/default.js` ones
+* Use `NODE_ENV=<ENV>` when you start application to use `config/<ENV.js>`
+* In order to override config on application start, check [here](https://github.com/lorenwest/node-config/wiki/Command-Line-Overrides)
 
 ```
-cp config/moonbeam.conf.json.example config/moonbeam.conf.json
-cp config/moonbeam.mongo.conf.json.example config/moonbeam.mongo.conf.json
-cp config/mongo.pubtrades.conf.json.example config/mongo.pubtrades.conf.json
-cp config/grenache.service.conf.json.example config/grenache.service.conf.json
-```
-
-```
-node worker.js [--$YOUR_CONFIG_OVERRIDES]
+NODE_ENV=[test/development/production] node worker.js
 ```
 
 ## indexes
 
-1. https://github.com/bitfinexcom/moonbeam-history#indexes
-2. candle worker indexes
-3. affiliate indexes
+1. messages indexes
+2. affiliate indexes
+3. user indexes
+4. usersettings indexes

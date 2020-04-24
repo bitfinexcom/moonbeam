@@ -1,6 +1,0 @@
-{
-  "dbName": "foo_history",
-  "mongoUrl": "mongodb://localhost",
-  "collection_trades": "userdata",
-  "collection_tos": "tos"
-}

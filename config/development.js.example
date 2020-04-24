@@ -1,0 +1,24 @@
+'use strict'
+
+// Override default.js
+module.exports = {
+  nodeHttpUrl: '__DEV_URL__',
+  contract: '__DEV_CONTRACT__',
+
+  cosign: {
+    pKey: '__DEV_COSIGN_KEY__',
+    contract: '__CONTRACT__',
+    permission: '__PERMISSION__'
+  },
+
+  hcaptcha: {
+    enabled: true,
+    secret: '__SECRET__'
+  },
+
+  dbUsers: {
+    dbName: 'trades',
+    mongoUrl: 'mongodb://localhost:27017',
+    collectionTrades: 'userdata'
+  }
+}
