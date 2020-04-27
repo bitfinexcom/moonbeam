@@ -19,6 +19,6 @@ module.exports = {
   dbUsers: {
     dbName: 'trades',
     mongoUrl: 'mongodb://localhost:27017',
-    collectionTrades: 'userdata'
+    collectionTrades: 'priv_trades'
   }
 }
