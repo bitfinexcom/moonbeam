@@ -2,7 +2,7 @@
 
 process.env.NODE_ENV = 'test'
 // fill in config/test.js
-const { port, nodeHttpUrl, contract, exampleUserConfig } = require('config')
+const { port, nodeHttpUrl, contract, exampleUserConfig, cosign } = require('config')
 
 const axios = require('axios')
 const fetch = require('node-fetch')
@@ -31,6 +31,9 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('get v1/tos')
   console.log(await req('GET', '/v1/tos'))
 
+  console.log('post v1/register')
+  console.log(await regUser(api, user, pubKey))
+
   console.log('post v1/push-tx, pushing usertos transaction')
   console.log(await req('POST', '/v1/push-tx', { data: tosPayload }))
 
@@ -55,8 +58,22 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
     }
   }))
 
+  console.log('post /v1/user-settings/social_twitter/set')
+  console.log(await req('POST', '/v1/user-settings/social_twitter/set', {
+    auth: authTxPayload,
+    data: {
+      value: 'twitter_handle'
+    }
+  }))
+
   console.log('post v1/user-settings/email/get')
   console.log(await req('POST', '/v1/user-settings/email/get', { auth: authTxPayload }))
+
+  console.log('post v1/user-settings/list/get')
+  console.log(await req('POST', '/v1/user-settings/list/get', {
+    auth: authTxPayload,
+    data: ['social_twitter', 'email']
+  }))
 
   // competitions
   console.log('get v1/competitions')
@@ -147,8 +164,8 @@ async function regUser (api, user, pubKey) {
     account: contract,
     name: 'reguser',
     authorization: [{
-      actor: contract,
-      permission: 'active'
+      actor: cosign.contract,
+      permission: cosign.permission
     }, {
       actor: user,
       permission: 'active'
@@ -195,15 +212,15 @@ function getReq (baseUrl) {
       opts.data = payload
     }
     try {
-      const { data } = await axios(opts)
-      return data
+      const { status, data } = await axios(opts)
+      return { status, data }
     } catch (e) {
       const str = e.response && e.response.data && e.response.data.error
       if (!str) {
         console.error(e)
         return
       }
-      return e.response.data
+      return { status: e.response.status, data: e.response.data }
     }
   }
 }
