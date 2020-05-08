@@ -6,9 +6,16 @@ module.exports = {
   contract: '__DEV_CONTRACT__',
 
   cosign: {
-    pKey: '__DEV_COSIGN_KEY__',
-    contract: '__CONTRACT__',
-    permission: '__PERMISSION__'
+    duelAuth: {
+      contract: '__CONTRACT__',
+      permission: '__PERMISSION__',
+      pKey: '__DEV_COSIGN_KEY__'
+    },
+    duelActions: {
+      contract: '__CONTRACT__',
+      permission: '__PERMISSION__',
+      pKey: '__DEV_COSIGN_KEY__'
+    }
   },
 
   hcaptcha: {
@@ -19,6 +26,6 @@ module.exports = {
   dbUsers: {
     dbName: 'trades',
     mongoUrl: 'mongodb://localhost:27017',
-    collectionTrades: 'priv_trades'
+    collectionHistory: 'priv_history'
   }
 }
