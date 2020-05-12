@@ -34,6 +34,9 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('post v1/register')
   console.log(await regUser(api, user, pubKey))
 
+  console.log('post v1/stake-limits/get')
+  console.log(await req('POST', '/v1/stake-limits/get', { auth: authTxPayload }))
+
   console.log('post v1/push-tx, pushing usertos transaction')
   console.log(await req('POST', '/v1/push-tx', { data: tosPayload }))
 
@@ -45,9 +48,6 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
 
   console.log('post v1/login')
   console.log(await req('POST', '/v1/login', { auth: authTxPayload }))
-
-  console.log('post v1/register')
-  console.log(await regUser(api, user, pubKey))
 
   // user-settings
   console.log('post /v1/user-settings/email/set')
@@ -135,6 +135,16 @@ async function getAuthTxPayload (api, user) {
 async function getTosTxPayload (api, user) {
   const authActions = [{
     account: contract,
+    name: 'validate',
+    authorization: [{
+      actor: cosign.duelActions.contract,
+      permission: cosign.duelActions.permission
+    }],
+    data: {
+      account: cosign.duelActions.contract
+    }
+  }, {
+    account: contract,
     name: 'usertos',
     authorization: [{
       actor: user,
@@ -146,16 +156,16 @@ async function getTosTxPayload (api, user) {
     }
   }]
 
-  const authTxData = await api.transact({ actions: authActions }, {
+  const tosTxData = await api.transact({ actions: authActions }, {
     ...opts,
     broadcast: false,
     sign: true
   })
 
-  const authTxHex = Serialize.arrayToHex(authTxData.serializedTransaction)
+  const tosTxHex = Serialize.arrayToHex(tosTxData.serializedTransaction)
   return {
-    t: authTxHex,
-    s: authTxData.signatures[0]
+    t: tosTxHex,
+    s: tosTxData.signatures[0]
   }
 }
 
@@ -164,8 +174,8 @@ async function regUser (api, user, pubKey) {
     account: contract,
     name: 'reguser',
     authorization: [{
-      actor: cosign.contract,
-      permission: cosign.permission
+      actor: cosign.duelAuth.contract,
+      permission: cosign.duelAuth.permission
     }, {
       actor: user,
       permission: 'active'
