@@ -10,8 +10,6 @@ module.exports = {
   },
 
   tosCurrent: 1,
-  tosCurrentDate: '2019-07-24',
-  tosAvailable: [1],
 
   nodeHttpUrl: 'http://INSERT_MAINNET_HTTP_ENDPOINT',
   contract: '__ACCOUNT__',

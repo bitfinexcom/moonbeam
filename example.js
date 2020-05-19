@@ -28,9 +28,6 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('creating usertos transaction')
   const tosPayload = await getTosTxPayload(api, user)
 
-  console.log('get v1/tos')
-  console.log(await req('GET', '/v1/tos'))
-
   console.log('post v1/register')
   console.log(await regUser(api, user, pubKey))
 
