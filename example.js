@@ -136,7 +136,7 @@ async function getAuthTxPayload (api, user) {
 }
 
 async function getTosTxPayload (api, user) {
-  const authActions = [{
+  const tosActions = [{
     account: contract,
     name: 'validate',
     authorization: [{
@@ -159,7 +159,7 @@ async function getTosTxPayload (api, user) {
     }
   }]
 
-  const tosTxData = await api.transact({ actions: authActions }, {
+  const tosTxData = await api.transact({ actions: tosActions }, {
     ...opts,
     broadcast: false,
     sign: true
@@ -173,7 +173,7 @@ async function getTosTxPayload (api, user) {
 }
 
 async function getWithdrawTxPayload (api, user) {
-  const authActions = [{
+  const withdrawActions = [{
     account: contract,
     name: 'validate',
     authorization: [{
@@ -196,7 +196,7 @@ async function getWithdrawTxPayload (api, user) {
     }
   }]
 
-  const tosTxData = await api.transact({ actions: authActions }, {
+  const tosTxData = await api.transact({ actions: withdrawActions }, {
     ...opts,
     broadcast: false,
     sign: true
