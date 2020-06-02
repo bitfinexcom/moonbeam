@@ -28,6 +28,9 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('creating usertos transaction')
   const tosPayload = await getTosTxPayload(api, user)
 
+  console.log('creating withdraw transaction')
+  const withdrawPayload = await getWithdrawTxPayload(api, user)
+
   console.log('post v1/register')
   console.log(await regUser(api, user, pubKey))
 
@@ -36,6 +39,9 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
 
   console.log('post v1/push-tx, pushing usertos transaction')
   console.log(await req('POST', '/v1/push-tx', { data: tosPayload }))
+
+  console.log('post v1/cosign-tx, cosigning withdraw transaction')
+  console.log(await req('POST', '/v1/cosign-tx', { data: withdrawPayload }))
 
   console.log('post v1/history')
   console.log(await req('POST', '/v1/history', {
@@ -130,7 +136,7 @@ async function getAuthTxPayload (api, user) {
 }
 
 async function getTosTxPayload (api, user) {
-  const authActions = [{
+  const tosActions = [{
     account: contract,
     name: 'validate',
     authorization: [{
@@ -153,7 +159,44 @@ async function getTosTxPayload (api, user) {
     }
   }]
 
-  const tosTxData = await api.transact({ actions: authActions }, {
+  const tosTxData = await api.transact({ actions: tosActions }, {
+    ...opts,
+    broadcast: false,
+    sign: true
+  })
+
+  const tosTxHex = Serialize.arrayToHex(tosTxData.serializedTransaction)
+  return {
+    t: tosTxHex,
+    s: tosTxData.signatures[0]
+  }
+}
+
+async function getWithdrawTxPayload (api, user) {
+  const withdrawActions = [{
+    account: contract,
+    name: 'validate',
+    authorization: [{
+      actor: cosign.duelActions.contract,
+      permission: cosign.duelActions.permission
+    }],
+    data: {
+      account: cosign.duelActions.contract
+    }
+  }, {
+    account: contract,
+    name: 'withdraw',
+    authorization: [{
+      actor: user,
+      permission: 'active'
+    }],
+    data: {
+      account: user,
+      quantity: '1.00000000 USDT'
+    }
+  }]
+
+  const tosTxData = await api.transact({ actions: withdrawActions }, {
     ...opts,
     broadcast: false,
     sign: true
