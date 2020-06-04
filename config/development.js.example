@@ -5,6 +5,8 @@ module.exports = {
   nodeHttpUrl: '__DEV_URL__',
   contract: '__DEV_CONTRACT__',
 
+  affiliatesUrl: '__AFFILIATES_API__',
+
   cosign: {
     duelAuth: {
       contract: '__CONTRACT__',

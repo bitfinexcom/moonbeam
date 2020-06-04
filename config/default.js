@@ -4,6 +4,8 @@ module.exports = {
 
   maxResults: 1000,
 
+  affiliatesUrl: '__AFFILIATES_API__',
+
   cors: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'x-csrf-token, Content-Type, Authorization, Content-Length, X-Requested-With'
