@@ -52,6 +52,19 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('post v1/login')
   console.log(await req('POST', '/v1/login', { auth: authTxPayload }))
 
+  // profile email
+  console.log('post v1/user-profile/email/set')
+  console.log(await req('POST', '/v1/user-profile/email/set', {
+    auth: authTxPayload,
+    data: { value: 'email2@examplemail.com' }
+  }))
+
+  console.log('post v1/user-profile/email/get')
+  console.log(await req('POST', '/v1/user-profile/email/get', { auth: authTxPayload }))
+
+  // console.log('post v1/user-profile/email/confirm')
+  // console.log(await req('POST', '/v1/user-profile/email/confirm', { token: '<insert token here>' }))
+
   // user-settings
   console.log('post /v1/user-settings/email/set')
   console.log(await req('POST', '/v1/user-settings/email/set', {
