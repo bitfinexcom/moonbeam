@@ -55,7 +55,10 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('post v1/login')
   console.log(await req('POST', '/v1/login', { auth: authTxPayload }))
 
-  // profile email
+  // profile
+  console.log('post v1/user-profile/get')
+  console.log(await req('POST', '/v1/user-profile/get', { auth: authTxPayload }))
+
   console.log('post v1/user-profile/email/set')
   console.log(await req('POST', '/v1/user-profile/email/set', {
     auth: authTxPayload,
