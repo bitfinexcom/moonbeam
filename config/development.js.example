@@ -4,6 +4,7 @@
 module.exports = {
   nodeHttpUrl: '__DEV_URL__',
   contract: '__DEV_CONTRACT__',
+  kycApiUrl: '__KYC_URL__',
 
   cosign: {
     duelAuth: {
@@ -27,5 +28,10 @@ module.exports = {
     dbName: 'trades',
     mongoUrl: 'mongodb://localhost:27017',
     collectionHistory: 'priv_history'
+  },
+
+  cfHeaders: {
+    'CF-Access-Client-Id': '__HEADER_VALUE__',
+    'CF-Access-Client-Secret': '__HEADER_VALUE__'
   }
 }
