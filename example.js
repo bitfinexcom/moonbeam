@@ -37,6 +37,9 @@ const opts = { blocksBehind: 3, expireSeconds: 120 }
   console.log('post v1/kyc/token/get')
   console.log(await req('POST', '/v1/kyc/token/get', { auth: authTxPayload }))
 
+  console.log('post v1/kyc/data/get')
+  console.log(await req('POST', '/v1/kyc/data/get', { auth: authTxPayload }))
+
   console.log('post v1/stake-limits/get')
   console.log(await req('POST', '/v1/stake-limits/get', { auth: authTxPayload }))
 
